@@ -127,7 +127,7 @@ Python数值类型主要有整数，浮点数和复数。整数类型可以分�
 Python中的复数与数学中复数的形式完全一致，都是由实部和虚部构成的，使用i或j来表示虚部。
 
 ```python
-# Complex。py
+# Complex.py
 
 a = 3 + 4j
 b = 5 + 6j
