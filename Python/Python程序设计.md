@@ -1652,7 +1652,67 @@ Area:48
 
 ## 字符串常用方法
 
-`find()`和`rfind()`方法分别用来查找一个字符串在当前字符串指定范围（默认是整个字符串）中首次出现和最后一次出现的位置，如果不存在则返回-1；index()和rindex()方法用来返回一个字符串在当前字符串指定范围和最后一次出现的位置，如果不存在抛出异常；count()方法用来返回一个字符串在当前字符串中出现的次数。
+1. **find()、rfind()、index()、rindex()、count()**
+
+   `find()`和`rfind()`方法分别用来查找一个字符串在当前字符串指定范围（默认是整个字符串）中首次出现和最后一次出现的位置，如果不存在则返回-1；`index()`和`rindex()`方法用来返回一个字符串在当前字符串指定范围和最后一次出现的位置，如果不存在抛出异常；`count()`方法用来返回一个字符串在当前字符串中出现的次数。
+
+2. **split()、rsplit()、partition()、rpartition()**
+
+   **split()**和**rsplit()**方法分别用来以指定字符为分隔符，从字符串左端和右端开始将其分隔成多个字符串，返回包含分割结果的列表；**partition()**和**rpartition()**用来以指定字符串为分隔符将原字符串分隔为3部分，即分隔符前的字符串、分隔符字符串、分隔符后的字符串，如果指定的分隔符不在原字符串中，则返回原字符串和两个空字符串组成的元组。
+
+   对于**split()**和**rsplit()**方法，如果不指定分隔符，则字符串中的任何空白字符号（包括空格、换行符、制表符等）都将被认为是分隔符，返回包含最终分割结果的列表。
+
+   **split()**和**rsplit()**方法允许指定最大分隔次数。
+
+   ```python
+   >>> s = '\n\nhello\t\tworld\n\n\none world, one dream '
+   >>> s.split(None, 2)
+   ['hello', 'world', 'one world, one dream ']
+   >>> s.rsplit(None, 2)
+   ['\n\nhello\t\tworld\n\n\none world,', 'one', 'dream']
+   >>> s.split(None, 6)
+   ['hello', 'world', 'one', 'world,', 'one', 'dream']
+   ```
+
+
+3. **join()**
+
+   join()方法用来将列表或其他可迭代对象中多个字符串进行连接，并在相邻两个字符串之间插入指定的字符串。
+
+   ```python
+   >>> l = ['apple', 'peach', 'banana', 'pear']
+   >>> sep = ','
+   >>> s = sep.join(l)
+   >>> s
+   'apple,peach,banana,pear'
+   ```
+4. **lower()、upper()、capitalize()、title()、swapcase()**
+
+   这些方法分别用来将字符串转换为小写、大写字符串，将字符串首字母变为大写，将每个单词的首字母变为大写以及大小写互换。
+5. **replace()**
+
+   该方法用来替换字符串中指定字符串或子字符串的所有重复出现，每次只能替换一个字符或一个字符串。
+6. **maketrans()、translate()**
+
+   
+7. **strip()、rstrip()、lstrip()**
+
+   
+8. **eval()**
+
+   
+9. **关键字in**
+
+   
+10. **startswith()、endswith()**
+
+    
+11. **isalnum()、isalpha()、isdigit()、isspace()、isupper()、islower()**
+
+    
+12. **center()、ljust()、rjust()**
+
+    
 
 # 正则表达式
 
@@ -1703,7 +1763,9 @@ Area:48
 | sub(pattern, repl, string[, count=0]) | 将字符串中所有pattern的匹配项用repl替换       |
 | escape(string)                        | 将字符串中所有特殊正则表达式进行转义          |
 
-其中，函数参数flags的值可以是re.I（忽略大小写），re.L，re.M（多行匹配模式），re.S（使元字符'.'匹配字符，包括换行符），re.U（匹配Unicode字符），re.X（忽略模式中的空格，并可以使用#注释）的不同组合（使用"|"进行组合）。
+其中，函数参数`flags`的值可以是`re.I`（忽略大小写），`re.L`，`re.M`（多行匹配模式），`re.S`（使元字符'.'匹配字符，包括换行符），`re.U`（匹配Unicode字符），`re.X`（忽略模式中的空格，并可以使用#注释）的不同组合（使用"|"进行组合）。
+
+
 
 ## 直接使用re模块函数
 
