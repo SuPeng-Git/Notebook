@@ -687,7 +687,7 @@ for i in x[::-1]:
 
 ```python
 aList = [3, 5, 7]
-bList = aList[:]    #切片，深复制
+bList = aList[:]    #切片，浅复制
 print( "aList == bList :{}".format(aList == bList) )    #切片完成，bList和aList中包含同样的元素引用
 print( "aList is bList :{}".format(aList is bList) )    #切片得到的bList对象和aList对象不是同一个对象
 bList[1] = 8    #列表中只包含可哈希对象，修改bList时不影响aList
@@ -1694,22 +1694,16 @@ Area:48
    该方法用来替换字符串中指定字符串或子字符串的所有重复出现，每次只能替换一个字符或一个字符串。
 6. **maketrans()、translate()**
 
-   
 7. **strip()、rstrip()、lstrip()**
 
-   
 8. **eval()**
 
-   
 9. **关键字in**
 
-   
 10. **startswith()、endswith()**
 
-    
 11. **isalnum()、isalpha()、isdigit()、isspace()、isupper()、islower()**
 
-    
 12. **center()、ljust()、rjust()**
 
     
