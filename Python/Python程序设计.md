@@ -18,6 +18,8 @@
 | 其他可迭代对象 | 生成器对象、range对象、zip对象、enumerate对象、map对象、filter对象 | 具有惰性求值的特点，除range对象之外，其他对象中元素只能使用一次 |
 | 编程单元       | 函数、类、模块                                               | 类和函数都属于可调用对象，模块用来集中存放函数、类、常量或其他对象 |
 
+所有标准对象均可用于布尔测试，同类型的对象之间可以比较大小。每个对象天生具有布尔True或False值。值为零的任何数字或者Null对象None的布尔值都是False。
+
 ## Python变量
 
 ### Python变量的创建
@@ -1287,7 +1289,17 @@ print(aDict)
 a = {3, 5}
 ```
 
-也可以使用set()函数将列表、元组等其他可迭代对象逆换为集合，如果原来地数据中存在重复元素，在转换为集合的时候只保留一个。
+`set()`:也可以使用set()函数将列表、元组等其他可迭代对象逆换为集合，如果原来地数据中存在重复元素，在转换为集合的时候只保留一个。
+
+`set()`语法：
+
+```python
+class set([iterable])
+```
+
+- iterable -- 可迭代的对象，比如列表、字典、元组等等。
+
+返回新的set对象，如果不提供任何参数，默认生成空集合。
 
 ```python
 a_set = set(range(8, 14))
@@ -1304,7 +1316,39 @@ x = set()       #空集合
 {0, 1, 2, 3, 7, 8, 9}
 ```
 
-可以使用集合对象的add()方法增加元素（元素已存在时自动忽略）。另外，也可以使用集合对象的pop()方法弹出并删除其中的一个元素，或者使用集合对象的remove()方法直接删除指定元素，以及使用集合对象的clear()方法清空集合删除所有元素。当不再使用某个集合时，可以使用del命令删除整个集合。
+---
+
+
+
+**创建不可变集合**：
+
+`frozenset()` 返回一个冻结的集合，冻结后的集合不能再添加或删除任何元素。
+
+`frozenset()`语法
+
+```python
+class frozenset([iterable])
+```
+
+- iterable -- 可迭代的对象，比如列表、字典、元组等等。
+
+返回新的frozenset对象，如果不提供任何参数，默认生成空集合。
+
+```python
+>>>a = frozenset(range(10))     # 生成一个新的不可变集合
+>>> a
+frozenset([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+>>> b = frozenset('runoob') 
+>>> b
+frozenset(['b', 'r', 'u', 'o', 'n'])   # 创建不可变集合
+>>>	
+```
+
+---
+
+
+
+可以 使用集合对象的add()方法增加元素（元素已存在时自动忽略）。另外，也可以使用集合对象的pop()方法弹出并删除其中的一个元素，或者使用集合对象的remove()方法直接删除指定元素，以及使用集合对象的clear()方法清空集合删除所有元素。当不再使用某个集合时，可以使用del命令删除整个集合。
 
 ```python
 a = {1, 4, 2, 3}
@@ -2415,4 +2459,186 @@ def visit_dir_walk(path):
 ```
 
  示例：使用xlrd模块读取Excel文件
+
+
+
+# 异常处理结构与程序调试、测试
+
+
+
+**异常处理**是指因为程序执行过程中出现而在正常控制流之外采取的行为。
+
+在Python检测到一个错误时，解释器就会指出当前程序流已无法继续执行下去，这时候就出现了异常。当程序执行过程中出现错误时Python会自动引发异常，程序员也可以通过`raise`语句显示地引发异常。
+
+尽管异常处理机制非常重要也非常有效，但不建议用来代替常规的检查，例如必要的if...else...判断。在编程时应该避免过多依赖于异常处理机制来提高程序的健壮性。
+
+## Python异常类与自定义异常
+
+
+
+
+
+
+
+## Python中的异常处理结构
+
+
+
+### try...except...结构
+
+```python
+try:
+    try块
+except Exception[as reason]:
+	except块
+```
+
+- `try`块：包含可能出现异常的语句
+- `except`块：处理异常的语句
+
+如果`try`中的代码块没有出现异常，则继续往下执行异常处理结构后面的代码；如果出现异常但没有被`except`捕获，则继续往外层抛出；如果所有外层都没有捕获并处理异常，则程序终止并将该异常抛给最终用户。
+
+在使用时，except子句可以在异常类名字后面指定一个变量，用来捕获异常的参数或更详细的信息。
+
+```python
+try:
+    raise Exception('spam', 'eggs')
+except Exception as inst:
+    print(type(inst))
+    print(inst.args)
+    print(inst)
+    x, y = inst.args
+    print('x=', x)
+    print('y=', y)
+```
+
+```python
+while True:
+    try:
+        x = int(input('Please enter a number:'))
+        break
+    except ValueError:
+        print('That was not a valid number.Try again...')
+```
+
+
+
+### try...except...else...结构
+
+```python
+try:
+    try块
+except Exception[as reason]: 
+    except块
+else:
+    else块
+```
+
+如果try中的代码抛出了异常，并且被某个except捕获，则执行相应的异常处理代码，这种情况下不会执行else中的代码；如果try中代码没有抛出任何异常，则执行else块中的代码。
+
+### 多个except的try结构
+
+```python
+try:
+    try块
+except Exception1[as reason]: 
+    except块
+except Exception2[as reason]: 
+    except块
+except Exception3[as reason]: 
+    except块
+else:
+    else块
+```
+
+一旦某个except捕获了异常，后面剩余的except子句将不会再执行。
+
+将要捕获的异常写在一个元组中，可以使用一个except语句捕获多个异常，并且共用一段异常处理代码；除非确定要捕获的多个异常可以使用同一段代码来处理，否则并不建议这样做。
+
+```python
+try:
+    try块
+except （Exception1，Exception2， Exception3）:
+	pass
+```
+
+为了避免遗漏导致没有得到处理的异常干扰程序的正常执行，在捕获了所有可能想到的异常之后，可以使用异常处理结构的最后一个`except`来捕获`BaseException`。
+
+### try...except...finally...
+
+```python
+try:
+    try块
+except Exception[as reason]:
+	except块
+finally:
+    finally块
+```
+
+finally块中的代码无论是否发生异常都会执行，常用来做一些清理工作以释放try块中申请的资源。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Python第三方库
+
+
+
+## turtle库
+
+
+
+1. 绘图坐标体系
+
+```python
+turtle.setup(width, height, startx, starty)
+```
+
+作用：设置主窗体的大小和位置
+
+- `width`窗口宽度，如果值是整数，表示像素值；如果值是小数，表示窗口宽度与屏幕的比例。
+- `height`窗口高度，如果值是整数，表示像素值；如果值是小数，表示窗口高度与屏幕的比例。
+- `strarx`窗口左侧与屏幕左侧的像素距离，如果值是None，窗口位于屏幕水平中央。
+- `starty`窗口顶部与屏幕屏幕顶部的像素距离，如果值是None，窗口位于屏幕垂直中央。
+
+2. 画笔控制函数
+
+```python
+turtle.penup()
+turtle.pu()
+turtle.up()
+```
 
